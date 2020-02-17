@@ -31,6 +31,18 @@ class EmployeeRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+
+    public function getAuthorsWithProjects()
+    {
+        $queryBuilder = $this->createQueryBuilder('e');
+
+        return $queryBuilder
+            ->leftJoin('e.projects', 'p')
+            ->addSelect('p')
+            ->getQuery()
+            ->getArrayResult();
+    }
+
     // /**
     //  * @return Employee[] Returns an array of Employee objects
     //  */

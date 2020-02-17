@@ -15,12 +15,26 @@ class EmployeeController
      * @param EmployeeRepository $employeeRepository
      * @return JsonResponse
      */
-    public function getEmployeeTasks($id, EmployeeRepository $employeeRepository)
+    public function getEmployeeProjects($id, EmployeeRepository $employeeRepository)
     {
         $projects = $employeeRepository->getAllProjectsByEmployeeId($id) ?? [];
 
         return new JsonResponse([
             json_encode($projects)
+        ]);
+    }
+
+    /**
+     * @Route("/employeers")
+     * @param EmployeeRepository $employeeRepository
+     * @return JsonResponse
+     */
+    public function getEmployeesWithProjectsList(EmployeeRepository $employeeRepository)
+    {
+        $employeesList = $employeeRepository->getAuthorsWithProjects();
+
+        return new JsonResponse([
+            json_encode($employeesList)
         ]);
     }
 }
